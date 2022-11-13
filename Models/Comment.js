@@ -2,6 +2,7 @@ const { Schema,model } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 const { Schema, model, Types } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
+const { addReply } = require('../contollers/comment-controller');
 
 const ReplySchema = new Schema(
     {
@@ -11,10 +12,13 @@ const ReplySchema = new Schema(
             default: () => new Types.ObjectId()
         },
         replyBody:{
-            type:String
+            type:String,
+            required:true,
+            trim:true
         },
         writtenBy:{
-            type:String
+            type:String,
+            required:true
         },
         createdAt:{
             type:Date,
@@ -51,6 +55,7 @@ const CommentSchema = new Schema(
     id:false
 }
 );
+add
 CommentSchema.virtual('replyCount').get(function(){
     return this.replies.length;
 });
