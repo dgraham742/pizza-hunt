@@ -36,11 +36,11 @@ const PizzaSchema = new Schema(
 );
 
 //get total count of comments and replies on retrievial
-pizzaSchema.virtual('commentCount').get(function(){
-    return this.comments.length;
+PizzaSchema.virtual('commentCount').get(function(){
+    return this.comments.reduce((total,comment)=> total + comment.replies.length + 1,0);
 });
 //create the Pizza model using the pizzaSchema
-const Pizza = model('pizza', pizzaSchema);
+const Pizza = model('pizza', PizzaSchema);
 
 //export the pizza model
 module.exports = Pizza;
